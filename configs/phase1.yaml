@@ -1,0 +1,29 @@
+project:
+  name: jepa-risk-detection
+  python_version: "3.12"
+
+data:
+  # Nexar train は公式testを含めず、ローカルに取得したデータを使う。
+  dataset: nexar
+  root: ../artifacts/data/nexar_train
+  annotations: ../artifacts/data/nexar_train/metadata/train-0000.parquet
+  videos: ../artifacts/data/nexar_train/train
+  # 実fpsは各MP4をffprobeで読み、これはffprobeで値を得られない場合のfallback。
+  fps: 30
+
+model:
+  encoder_id: facebook/vjepa2-vitl-fpc64-256
+  # ローカルHF snapshot refs/main（API・重みを固定する）。
+  revision: b3c1679b7c34d3255ef3547f27c7b226aefab26f
+  predictor_source: facebookresearch/vjepa2
+  predictor_commit: 204698b45b3712590f06245fbfba32d3be539812
+  checkpoint: ../artifacts/checkpoints/vitl.pt
+
+execution:
+  device: auto
+  dtype: float32
+
+windows:
+  window_sec: 2.0
+  stride_sec: 0.5
+  input_frames: 64
