@@ -5,3 +5,7 @@ __pycache__/
 .pytest_cache/
 .DS_Store
 *.py[cod]
+
+# Local implementation and orchestration notes; not part of the public release.
+2026-09-06-implementation-plan.md
+2026-09-14-orca-luna-validation-plan.md
