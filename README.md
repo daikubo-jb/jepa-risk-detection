@@ -4,6 +4,8 @@ English version: [`README.en.md`](README.en.md)
 
 V-JEPA 2 の凍結特徴量と予測誤差を使い、Nexar Collision Predictionの走行映像で衝突・ニアミスのリスク予測を検証する実験プロジェクトです。
 
+本プロジェクトは探索的な実験です。Nexarの公式test splitは取得・評価しておらず、現在のA/B指標はモデル選択または閾値選択に使った内部validationで算出しています。したがって、これらの結果は事故の予知性能、未見データへの一般化性能、実運用の安全性能を示すものではありません。
+
 Pythonの実行環境は `uv` で管理します。
 
 ```sh
@@ -37,7 +39,7 @@ uv run python -m jepa_risk.cli extract \
 
 `extract`はPyAVで窓のRGBフレームを読み、設計書のletterbox（256×256、BILINEAR、黒余白）後に公式`VJEPA2VideoProcessor`で正規化し、`get_vision_features()`の`[B,8192,1024]`を全体平均`[B,1024]`と時間平均`[B,32,1024]`へ集約します。窓内のフレームは半開区間`[observation_start_s, available_at_s)`だけから選びます。`--selection smoke20`はmanifestに保存したseed=42の固定20本、`pilot`は固定予備集合を使います。cacheはモデルrevision・manifest・窓定義・前処理・pooling設定のSHA-256キー単位で保存し、未完成ディレクトリは再利用しません。`--limit-videos`／`--max-windows`を外す前に、実行時間と保存容量を確認してください。
 
-train/validationのcacheが揃った後は、trainのみでscalerと分類器をfitし、validationのframe APでCを選びます。validationで決めた閾値はtestへ固定適用します。
+train/validationのcacheが揃った後は、trainのみでscalerと分類器をfitし、validationのframe APでCを選びます。最終評価を行う場合は、validationで決めた閾値をtestへ固定適用します。
 
 ```sh
 uv run python -m jepa_risk.cli train-probe \
@@ -132,7 +134,7 @@ uv run python -m jepa_risk.cli evaluate \
   --seed 42
 ```
 
-全件validationの統合レポートは`artifacts/report-p6-full-ab/`に生成済みです。公式test未取得のため、現時点の指標は探索的なvalidation結果です。
+全件validationの統合レポートは`artifacts/report-p6-full-ab/`に生成済みです。公式test未取得のため、現時点の指標は探索的なvalidation結果であり、実運用の警告性能や安全性を保証するものではありません。
 
 ## Nexar trainデータ
 
@@ -155,4 +157,4 @@ Nexarの動画とParquetは、[公式データカード](https://huggingface.co/
 
 ## 公開方針
 
-独自コードは[`LICENSE`](LICENSE)のMIT Licenseで公開します。データ、モデル、生成物の利用条件と公開対象は[`PUBLICATION_POLICY.md`](PUBLICATION_POLICY.md)にまとめています。英語版は[`PUBLICATION_POLICY.en.md`](PUBLICATION_POLICY.en.md)です。第三者表示は[`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)にまとめています。生データ、フレーム、特徴量cache、モデルcheckpoint、Cookieはリポジトリへ含めません。
+独自コードは[`LICENSE`](LICENSE)のMIT Licenseで公開します。データ、モデル、生成物の利用条件と公開対象は[`PUBLICATION_POLICY.md`](PUBLICATION_POLICY.md)にまとめています。英語版は[`PUBLICATION_POLICY.en.md`](PUBLICATION_POLICY.en.md)です。第三者表示は[`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)にまとめています。初回公開には生データ、フレーム、特徴量cache、モデルcheckpoint、Bの分類モデル、Cookieを含めません。

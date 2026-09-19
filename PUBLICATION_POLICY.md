@@ -1,6 +1,6 @@
 # データ・モデル・公開方針
 
-更新日: 2026-09-15
+更新日: 2026-09-19
 
 英語版: [`PUBLICATION_POLICY.en.md`](PUBLICATION_POLICY.en.md) / 第三者表示: [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)
 
@@ -11,7 +11,7 @@ English version: [`PUBLICATION_POLICY.en.md`](PUBLICATION_POLICY.en.md)
 ## 結論
 
 - Phase 1で実際に使用したデータセットはNexar Collision Predictionの`train`だけです。公式`test-public`／`test-private`は使用していません。
-- MP4、Parquet、抽出フレーム、特徴量cache、動画別スコア、preview画像は、初回の公開リポジトリに含めません。Bのprobeモデルは公開候補としますが、Nexarデータから学習した派生モデルとして個別確認を通過した場合だけ含めます。
+- MP4、Parquet、抽出フレーム、特徴量cache、動画別スコア、preview画像は、初回の公開リポジトリに含めません。Bのprobeモデルも初回公開から除外します。将来公開する場合は、Nexarデータから学習した派生モデルとして別途権利確認を行います。
 - モデルはモデルID、固定revision、取得手順、出所を記録します。大容量のモデルファイルは同梱しません。
 - A経路で使うMeta公式のraw predictor checkpoint `vitl.pt`は、個別の適用ライセンスを確認できるまで再配布・ミラー・リポジトリへの同梱を行いません。
 - 集計結果と説明文は、個別動画を特定できる情報、フレーム画像、絶対パス、秘密情報を含まないことを確認したうえで公開します。
@@ -103,25 +103,25 @@ A経路では、Meta公式READMEから案内されている次のcheckpointを�
 
 ## 4. プロジェクト独自コード
 
-ルート`LICENSE`には独自コード向けのMIT Licenseを追加し、著作権表示を`daikubo-jb`としています。公開前に、`daikubo-jb`が独自コードをMITで許諾できることを確認します。共同著作者・所属先など別の権利者が関係する場合、または権利関係が不明な場合だけ追加確認を行います。独自コード用ライセンスは、Nexarデータ、V-JEPA 2モデル、raw checkpoint、Python依存パッケージの条件を上書きしません。
+ルート`LICENSE`には独自コード向けのMIT Licenseを追加し、著作権表示を`daikubo-jb`としています。本公開では、独自コードを個人所有コードとしてMITで公開します。独自コード用ライセンスは、Nexarデータ、V-JEPA 2モデル、raw checkpoint、Python依存パッケージの条件を上書きしません。
 
-Bのprobeモデルを公開する場合は、元データを含まない係数・scaler統計・設定だけを安全な形式で配布し、学習データ、特徴量cache、動画別スコアを同梱しません。Nexarライセンスが学習済みprobeの再配布を明示していないため、公開前にこの派生モデルの公開可否を別途確認します。`pickle`のままではなく、JSONまたはNPZなどの形式を優先します。
+Bのprobeモデルは初回公開には含めません。将来公開する場合は、元データを含まない係数・scaler統計・設定だけを安全な形式で配布し、学習データ、特徴量cache、動画別スコアを同梱しません。Nexarライセンスが学習済みprobeの再配布を明示していないため、その時点で派生モデルの公開可否を別途確認します。`pickle`のままではなく、JSONまたはNPZなどの形式を優先します。
 
 ## 5. 公開前チェックリスト
 
 - [x] 独自コード用のルート`LICENSE`と第三者表示文書を追加した
-- [ ] Nexarの公式ライセンス、データカード、指定引用を公開文書から参照できる
-- [ ] MP4、Parquet、フレーム、特徴量cache、動画別出力、raw checkpoint、Cookieが公開対象から除外されている
-- [ ] B probeモデルの派生・再配布可否を確認し、安全な配布形式とモデルカードを用意した
-- [ ] `vitl.pt`の個別条件を再確認し、再配布不可の暫定方針を更新した
-- [ ] Meta由来コードの転載・翻案範囲を確認し、該当するMIT/Apache-2.0表示を追加した
-- [ ] Git履歴、LFS、release添付、wheel、sdist、圧縮アーカイブを検査した
-- [ ] READMEとレポートに、公式test未評価・実環境の安全性能未検証であることを明記した
-- [ ] 公開する集計結果に絶対パス、個別動画の識別情報、画像、秘密情報がない
+- [x] Nexarの公式ライセンス、データカード、指定引用を公開文書から参照できる
+- [x] MP4、Parquet、フレーム、特徴量cache、動画別出力、raw checkpoint、Cookieが公開対象から除外されている
+- [x] B probeモデルを初回公開から除外し、将来公開時の権利確認を保留事項として記録した
+- [x] `vitl.pt`の公式出所と個別条件を確認し、初回公開から除外する方針を確定した
+- [x] Meta由来コードの転載・翻案範囲を確認し、該当するMIT/Apache-2.0表示を第三者表示に反映した
+- [x] 現行Git履歴、公開ツリー、wheel、sdist、圧縮アーカイブ候補を検査した。GitHub Release添付は作成前のため、作成時に再確認する
+- [x] READMEとレポートに、公式test未評価・実環境の安全性能未検証であることを明記した
+- [x] 公開する集計結果に絶対パス、個別動画の識別情報、画像、秘密情報がないことを確認した
 
 ## English summary
 
-This project uses only the `train` split of the Nexar Collision Prediction dataset for Phase 1. The official public and private test splits are not used. Raw videos, Parquet metadata, frames, feature caches, per-video scores, preview images, cookies, and raw model checkpoint files are excluded from the initial public repository. The B probe is a possible release artifact, subject to a separate derived-model rights check.
+This project uses only the `train` split of the Nexar Collision Prediction dataset for Phase 1. The official public and private test splits are not used. Raw videos, Parquet metadata, frames, feature caches, per-video scores, preview images, cookies, raw model checkpoint files, and the B probe are excluded from the initial public repository. A future B-probe release would require a separate derived-model rights check.
 
 The Nexar dataset is governed by the [Nexar Open Data License](https://huggingface.co/datasets/nexar-ai/nexar_collision_prediction/blob/main/LICENSE). Keep the required copyright and citation information. Do not sell, sublicense, or redistribute the dataset for profit without prior written consent from Nexar. Do not use it for malicious systems or unsafe driving, deepfakes or misinformation, re-identification or privacy violations, weaponization, or other unlawful purposes. Users must review the current official license themselves.
 
@@ -129,4 +129,4 @@ The encoder is `facebook/vjepa2-vitl-fpc64-256` at revision `b3c1679b7c34d3255ef
 
 The A-path raw predictor checkpoint `vitl.pt` is obtained from the official Meta URL and identified by the pinned source commit and SHA-256 above. Its separate terms were not conclusively identified in the reviewed official pages, so this repository does not redistribute or mirror it. The hash and size must be rechecked immediately before publication.
 
-The project's own code is released under the root [MIT License](LICENSE), with `daikubo-jb` as the copyright holder. Before publication, confirm that `daikubo-jb` is authorized to grant this license for the project-owned code. Additional review is needed only if co-authors, an employer, or another rights holder is involved or the ownership is uncertain. The project license does not override the terms of the dataset, model, checkpoint, or dependencies. This policy is a publication gate, not legal advice.
+The project's own code is released under the root [MIT License](LICENSE), with `daikubo-jb` as the copyright holder. For this release, the project-owned code is treated as individually owned code. The project license does not override the terms of the dataset, model, checkpoint, or dependencies. This policy is a publication gate, not legal advice.

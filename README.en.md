@@ -145,7 +145,7 @@ The B encoder is `facebook/vjepa2-vitl-fpc64-256` at the pinned revision in [`co
 
 ## Publication and licensing
 
-Before publication, read both the [English publication policy](PUBLICATION_POLICY.en.md) and the [Japanese publication policy](PUBLICATION_POLICY.md). The initial release excludes raw data, frames, caches, per-video scores, preview images, cookies, and raw model checkpoints. The trained B probe may be included only after the separate derived-model rights check described in the policy.
+Before publication, read both the [English publication policy](PUBLICATION_POLICY.en.md) and the [Japanese publication policy](PUBLICATION_POLICY.md). The initial release excludes raw data, frames, caches, per-video scores, preview images, cookies, raw model checkpoints, and the trained B probe. A future B-probe release would require the separate derived-model rights check described in the policy.
 
 The project code is released under the [MIT License](LICENSE), with `daikubo-jb` as the copyright holder. This license applies only to the project's own code. It does not override external dataset, model, checkpoint, or dependency terms. Third-party conditions are summarized in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
 

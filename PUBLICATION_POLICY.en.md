@@ -1,6 +1,6 @@
 ---
 title: Data, Model, and Publication Policy
-date: 2026-09-15
+date: 2026-09-19
 status: publication-gate
 ---
 
@@ -11,11 +11,11 @@ This document separates the rights and release scope for project code, external 
 ## Current decision
 
 - Phase 1 uses only the `train` split of the Nexar Collision Prediction dataset. The official public and private test splits were not used.
-- The initial repository release must not include MP4 files, Parquet metadata, extracted frames, feature caches, per-video scores, preview images, cookies, or raw model checkpoint files. The B probe is a possible release artifact, but only after a separate derived-model rights check.
+- The initial repository release must not include MP4 files, Parquet metadata, extracted frames, feature caches, per-video scores, preview images, cookies, raw model checkpoint files, or the B probe. A future B-probe release would require a separate derived-model rights check.
 - Model IDs, source repositories, pinned revisions/commits, download instructions, and verification hashes may be documented without redistributing the model files.
 - The raw Meta predictor checkpoint `vitl.pt` is not redistributed or mirrored because its separate checkpoint terms were not conclusively identified in the reviewed official materials.
 - Aggregate reports may be released only after removing video-level identifiers, absolute paths, images, secrets, and other information that could expose individuals or source records.
-- The project's own code now has a root MIT `LICENSE` with `daikubo-jb` as the copyright holder. Any co-author or employer rights must still be confirmed before publication.
+- The project's own code has a root MIT `LICENSE` with `daikubo-jb` as the copyright holder. For this release, the project-owned code is treated as individually owned code. This does not change the separate terms for external data, models, checkpoints, or dependencies.
 
 ## 1. Nexar Collision Prediction
 
@@ -65,7 +65,7 @@ The URL is listed by the official Meta README, but the reviewed official materia
 
 ## 4. Project code and dependencies
 
-The project's own code is released under the root [MIT License](LICENSE), with `daikubo-jb` as the copyright holder. Before publication, confirm that `daikubo-jb` is authorized to grant this license for the project-owned code. Additional review is needed only if a co-author, employer, or other rights holder is involved or ownership is uncertain. The MIT license applies only to project-owned code.
+The project's own code is released under the root [MIT License](LICENSE), with `daikubo-jb` as the copyright holder. For this release, the project-owned code is treated as individually owned code. The MIT license applies only to project-owned code.
 
 The project's MIT license does not override the Nexar dataset license, the V-JEPA 2 model terms, the raw checkpoint terms, or the licenses of declared Python dependencies. The project does not bundle those external assets in the initial source release.
 
@@ -76,22 +76,22 @@ Allowed candidates, subject to final inspection:
 1. Source code, configuration templates, and CPU/synthetic tests.
 2. Official source links, model IDs, pinned revisions, commits, download instructions, and verification hashes.
 3. Aggregate reports that contain no video-level identifiers, raw-derived files, absolute paths, or secrets.
-4. The B linear probe, if its derived-model redistribution is cleared, distributed without training data, feature caches, or per-video scores and accompanied by a model card.
+4. A future B linear-probe release, only if its derived-model redistribution is cleared, distributed without training data, feature caches, or per-video scores and accompanied by a model card.
 
 Excluded from the initial release:
 
 - Nexar videos, Parquet files, frames, raw annotations, and detailed manifests.
-- V-JEPA 2 model files, `vitl.pt`, feature caches, and compressed archives containing them. The B probe remains excluded until its separate rights check is complete.
+- V-JEPA 2 model files, `vitl.pt`, feature caches, and compressed archives containing them. The B probe is also excluded from the initial release; its separate rights check is deferred to any future model release.
 - Per-video scores, failure intervals, thumbnails, previews, cookies, tokens, and local absolute paths.
 
 ## 6. Publication gate
 
 - [x] Confirm the stated copyright holder and add a root `LICENSE` for project code.
-- [ ] Add a final third-party notice and retain applicable Meta MIT/Apache notices.
-- [ ] Re-check the current Nexar license, dataset citation, and ethical restrictions.
-- [ ] Re-check the pinned Hugging Face model license and revision.
-- [ ] Re-check `vitl.pt` SHA-256, size, source availability, and separate terms.
-- [ ] Inspect Git history, Git LFS, release attachments, wheels, sdists, and archives.
-- [ ] Confirm no raw data, frames, caches, checkpoints, cookies, absolute paths, or video-level identifiers are released.
-- [ ] Confirm that releasing the B probe is permitted, export it without pickle, and add a model card with provenance and limitations.
-- [ ] State clearly that official-test evaluation and production safety validation are not complete.
+- [x] Add a final third-party notice and retain applicable Meta MIT/Apache notices.
+- [x] Re-check the current Nexar license, dataset citation, and ethical restrictions.
+- [x] Re-check the pinned Hugging Face model license and revision.
+- [x] Re-check the `vitl.pt` source and separate terms; exclude it from the initial release because those terms are not conclusively identified.
+- [x] Inspect the current Git history, public tree, wheels, sdists, and candidate archives. GitHub release attachments will be rechecked if/when they are created.
+- [x] Confirm no raw data, frames, caches, checkpoints, cookies, absolute paths, or video-level identifiers are released.
+- [x] Exclude the B probe from the initial release; defer its derived-model rights check, safe export, and model card to any future model release.
+- [x] State clearly that official-test evaluation and production safety validation are not complete.
