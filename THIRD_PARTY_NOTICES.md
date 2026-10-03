@@ -10,6 +10,10 @@ Required citation:
 
 > Moura, Daniel C., and Zvitia, Orly. “Nexar Collison Dataset.” Hugging Face, 2025, https://huggingface.co/datasets/nexar-ai/nexar_collision_prediction.
 
+The dataset card also requests citation of the accompanying dataset paper:
+
+> Daniel C. Moura, Shizhan Zhu, Orly Zvitia, “Nexar Dashcam Collision Prediction Dataset and Challenge,” arXiv:2503.03848, 2025, https://arxiv.org/abs/2503.03848.
+
 ## V-JEPA 2 Hugging Face encoder
 
 The B path retrieves `facebook/vjepa2-vitl-fpc64-256` at revision `b3c1679b7c34d3255ef3547f27c7b226aefab26f`. The pinned Hugging Face page displays an MIT license: [model page](https://huggingface.co/facebook/vjepa2-vitl-fpc64-256/tree/b3c1679b7c34d3255ef3547f27c7b226aefab26f).
@@ -26,11 +30,11 @@ The A path follows the Meta V-JEPA 2 architecture and is pinned to commit `20469
 
 Official source: [facebookresearch/vjepa2](https://github.com/facebookresearch/vjepa2/tree/204698b45b3712590f06245fbfba32d3be539812).
 
-The current technical review classifies `src/jepa_risk/predictor.py` as a project-owned compatibility implementation, not a vendored Meta source file. The current tree does not include the three Apache-2.0 utility files listed above. If Meta source is copied or adapted in a future revision, the applicable copyright and MIT/Apache-2.0 notices must be retained.
+`src/jepa_risk/predictor.py` implements a compatibility path around the Meta V-JEPA 2 architecture and checkpoint naming. It includes code whose operations and structure correspond to the pinned Meta implementation (including RoPE attention, Transformer blocks, video patch embedding, and predictor token handling), alongside project-specific changes. The extent of copying or adaptation is not asserted here. The file carries an attribution and MIT license reference; the complete pinned Meta MIT license is retained in [`THIRD_PARTY_LICENSES/META-VJEPA2-MIT.txt`](THIRD_PARTY_LICENSES/META-VJEPA2-MIT.txt). The current tree does not include the three Apache-2.0 utility files listed above. See the pinned [Meta source](https://github.com/facebookresearch/vjepa2/tree/204698b45b3712590f06245fbfba32d3be539812).
 
 ## Meta raw predictor checkpoint
 
-The A path uses the separately downloaded `vitl.pt` checkpoint from `https://dl.fbaipublicfiles.com/vjepa2/vitl.pt`. The checkpoint is not redistributed or mirrored because its separate terms were not conclusively identified in the reviewed official materials. Its current local hash and size are recorded in [`PUBLICATION_POLICY.en.md`](PUBLICATION_POLICY.en.md).
+The local A-path `vitl.pt` has SHA-256 `5346856ec9df69487fe72a25bf2632aaa8112df33fb67708e3f7374edc1f7012` and size 5,127,726,842 bytes. The official Hugging Face file [`facebook/vjepa2-vitl-fpc64-256/original/model.pth`](https://huggingface.co/facebook/vjepa2-vitl-fpc64-256/blob/main/original/model.pth) displays the same SHA-256 and size (5.13 GB), and its model page displays MIT. This establishes byte identity with that official HF-hosted MIT-marked file; it does not establish which URL was used for the historical download. The project records `https://dl.fbaipublicfiles.com/vjepa2/vitl.pt` as the Meta source URL, but no download log was found. The checkpoint is not redistributed or mirrored in this repository. See [`PUBLICATION_POLICY.en.md`](PUBLICATION_POLICY.en.md) for the evidence and its limits.
 
 ## Python dependencies
 

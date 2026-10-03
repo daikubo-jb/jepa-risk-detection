@@ -1,5 +1,9 @@
-# The architecture follows the MIT-licensed Meta implementation at
-# https://github.com/facebookresearch/vjepa2 (commit pinned in phase1.yaml).
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# The MIT notice applies to portions of this file based on or adapted from the
+# Meta V-JEPA 2 implementation identified below; this file also contains
+# project-specific compatibility and inference changes. See
+# THIRD_PARTY_LICENSES/META-VJEPA2-MIT.txt for the complete notice and license.
+# Pinned source: https://github.com/facebookresearch/vjepa2/tree/204698b45b3712590f06245fbfba32d3be539812
 
 """Official V-JEPA 2 style masked prediction for the Phase 1 leak test.
 

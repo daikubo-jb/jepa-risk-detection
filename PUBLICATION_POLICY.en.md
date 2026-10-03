@@ -27,6 +27,12 @@ Official sources checked on 2026-09-15:
 
 The checked license revision was `ed1ffff7c2dfb9014ff476f079ba5acefc71c72c`. The dataset license requires attribution to Nexar and the specified citation, requires redistribution to retain the copyright notice, conditions, and disclaimers, and prohibits selling, sublicensing, or otherwise redistributing the dataset for profit without prior written consent from Nexar.
 
+Preserve the license-specified dataset citation and also cite the dataset paper identified by the dataset card:
+
+> Moura, Daniel C., and Zvitia, Orly. “Nexar Collison Dataset.” Hugging Face, 2025, https://huggingface.co/datasets/nexar-ai/nexar_collision_prediction.
+>
+> Daniel C. Moura, Shizhan Zhu, Orly Zvitia, “Nexar Dashcam Collision Prediction Dataset and Challenge,” arXiv:2503.03848, 2025, https://arxiv.org/abs/2503.03848.
+
 The license also restricts malicious systems, unsafe driving or simulated unsafe behavior, deepfakes and misinformation, re-identification and privacy violations, weaponization, exploitative practices involving accident-prone regions or individuals, and unlawful use. Users must review the current official license themselves at download and release time.
 
 Required citation:
@@ -53,15 +59,16 @@ The A implementation is pinned to Meta repository commit `204698b45b3712590f0624
 - `src/datasets/utils/video/randerase.py`
 - `src/datasets/utils/worker_init_fn.py`
 
-See the [official V-JEPA 2 README](https://github.com/facebookresearch/vjepa2/blob/204698b45b3712590f06245fbfba32d3be539812/README.md) and [repository](https://github.com/facebookresearch/vjepa2). The current technical review classifies `src/jepa_risk/predictor.py` as a project-owned compatibility implementation rather than a vendored Meta source file. The current tree does not include the three Apache-2.0 utility files listed above. The Meta attribution and pinned commit remain documented; if Meta source is copied or adapted in the future, the applicable copyright and MIT/Apache-2.0 notices must be retained.
+See the [official V-JEPA 2 README](https://github.com/facebookresearch/vjepa2/blob/204698b45b3712590f06245fbfba32d3be539812/README.md) and [repository](https://github.com/facebookresearch/vjepa2). `src/jepa_risk/predictor.py` is a compatibility implementation whose RoPE attention, Transformer blocks, video patch embedding, and predictor token handling correspond to the pinned Meta implementation, alongside project-specific changes. This policy does not assert which parts are independent implementations or adaptations. The file carries Meta attribution and an MIT reference; the complete pinned Meta MIT license is retained in [`THIRD_PARTY_LICENSES/META-VJEPA2-MIT.txt`](THIRD_PARTY_LICENSES/META-VJEPA2-MIT.txt). The current tree does not include the three Apache-2.0 utility files listed above.
 
 The A raw checkpoint is:
 
 - URL: `https://dl.fbaipublicfiles.com/vjepa2/vitl.pt`
 - Current local SHA-256: `5346856ec9df69487fe72a25bf2632aaa8112df33fb67708e3f7374edc1f7012`
 - Current local size: `5,127,726,842` bytes
+- The official Hugging Face [`original/model.pth`](https://huggingface.co/facebook/vjepa2-vitl-fpc64-256/blob/main/original/model.pth) displays the same SHA-256 and size; that model page displays MIT.
 
-The URL is listed by the official Meta README, but the reviewed official materials did not identify a separate license for this raw `.pt` file. The repository therefore does not distribute, mirror, or promise commercial redistribution rights for it. Recompute the hash and size immediately before publication.
+The local file is byte-identical to the file hosted at the MIT-marked official HF model page. This identity does not prove the historical download route. The project records the Meta URL above as its source, but no download log or sidecar was found; whether the file was actually retrieved from Meta, HF, or another route remains unverified. The repository does not include or mirror the checkpoint. Recompute its hash and size immediately before publication. The HF license display applies to the identified HF file and does not establish terms for unrelated assets or derived weights.
 
 ## 4. Project code and dependencies
 
@@ -90,7 +97,7 @@ Excluded from the initial release:
 - [x] Add a final third-party notice and retain applicable Meta MIT/Apache notices.
 - [x] Re-check the current Nexar license, dataset citation, and ethical restrictions.
 - [x] Re-check the pinned Hugging Face model license and revision.
-- [x] Re-check the `vitl.pt` source and separate terms; exclude it from the initial release because those terms are not conclusively identified.
+- [x] Confirm byte identity with the MIT-marked official HF file by SHA-256 and size; record that historical download route is unverified and exclude the checkpoint itself from the initial release.
 - [x] Inspect the current Git history, public tree, wheels, sdists, and candidate archives. GitHub release attachments will be rechecked if/when they are created.
 - [x] Confirm no raw data, frames, caches, checkpoints, cookies, absolute paths, or video-level identifiers are released.
 - [x] Exclude the B probe from the initial release; defer its derived-model rights check, safe export, and model card to any future model release.

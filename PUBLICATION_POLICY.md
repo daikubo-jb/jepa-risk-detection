@@ -29,6 +29,12 @@ English version: [`PUBLICATION_POLICY.en.md`](PUBLICATION_POLICY.en.md)
 
 ### 利用・表示上の条件
 
+Nexar指定のdataset citationを維持し、データカードが案内するdataset paperも併記します。
+
+> Moura, Daniel C., and Zvitia, Orly. “Nexar Collison Dataset.” Hugging Face, 2025, https://huggingface.co/datasets/nexar-ai/nexar_collision_prediction.
+>
+> Daniel C. Moura, Shizhan Zhu, Orly Zvitia, “Nexar Dashcam Collision Prediction Dataset and Challenge,” arXiv:2503.03848, 2025, https://arxiv.org/abs/2503.03848.
+
 2026-09-15に確認した公式ライセンスrevisionは`ed1ffff7c2dfb9014ff476f079ba5acefc71c72c`です。公式ライセンスに従い、少なくとも次を守ります。
 
 - Nexarの著作権表示と指定された引用情報を保持・掲載する。
@@ -71,7 +77,7 @@ Metaの[V-JEPA 2公式リポジトリ](https://github.com/facebookresearch/vjepa
 - `src/datasets/utils/video/randerase.py`
 - `src/datasets/utils/worker_init_fn.py`
 
-このプロジェクトの`src/jepa_risk/predictor.py`は、Metaのソースファイルを同梱したものではなく、公式のアーキテクチャとcheckpointのstate dict名に合わせた独自の互換実装として分類します。現行ツリーには、公式READMEがApache-2.0として指定する3つのユーティリティファイルの転載はありません。Metaの実装への帰属と固定commitは第三者表示に残します。将来Metaのソースを転載・翻案する場合は、対象ファイルの著作権表示とMITまたはApache-2.0の条件を保持します。公式実装のライセンスが、データセットや別配布の重みの権利を自動的に与えるとは解釈しません。
+このプロジェクトの`src/jepa_risk/predictor.py`は、Meta V-JEPA 2と対応するRoPE attention、Transformer block、video patch embedding、predictor token処理を含む互換実装です。プロジェクト固有の変更も含み、どの部分が独立実装か翻案かはここでは断定しません。ファイルにMeta著作権表示とMIT参照を付し、pinned Meta MIT本文を[`THIRD_PARTY_LICENSES/META-VJEPA2-MIT.txt`](THIRD_PARTY_LICENSES/META-VJEPA2-MIT.txt)へ保持します。現行ツリーに公式READMEがApache-2.0として指定する3 utilityファイルは含まれません。公式実装のライセンスが、データセットや別配布の重みの権利を自動的に与えるとは解釈しません。
 
 ### A経路のraw predictor checkpoint
 
@@ -81,8 +87,9 @@ A経路では、Meta公式READMEから案内されている次のcheckpointを�
 - Project-pinned source commit: `204698b45b3712590f06245fbfba32d3be539812`
 - Current local SHA-256: `5346856ec9df69487fe72a25bf2632aaa8112df33fb67708e3f7374edc1f7012`
 - Current local size: `5,127,726,842` bytes（約4.78 GiB / 5.13 GB）
+- [公式Hugging Face上の`original/model.pth`](https://huggingface.co/facebook/vjepa2-vitl-fpc64-256/blob/main/original/model.pth)に表示されるSHA-256・sizeと一致し、同モデルページはMITを表示する。
 
-上記のraw `.pt`ファイルについて、今回確認した公式ページだけでは個別の適用ライセンスを確定できませんでした。そのため、公開リポジトリには含めず、利用者が公式配布元から自分で取得する方式にします。サイズとSHA-256は、公開直前に再計算して更新します。raw checkpointを商用利用、再配布、派生重みの公開に利用できるとは、この文書から判断しません。
+ローカルファイルは公式HF上のMIT表示ファイルとbyte単位で同一です。ただし、このハッシュ一致は履歴上の実取得経路を証明しません。記録ではMeta URLを取得元としていますが、download log/sidecarは見つからず、実際にMeta URL、HF URL、または別経路のどれを使ったかは未確認です。公開treeにはcheckpointを含めず、利用者が公式配布元から取得する方式にします。サイズとSHA-256は公開直前に再計算します。HFファイルのMIT表示との一致を記録しますが、別ファイルやdataset・派生重み等の条件まで判断するものではありません。
 
 ## 3. 生成物と再現性
 
@@ -113,8 +120,8 @@ Bのprobeモデルは初回公開には含めません。将来公開する場�
 - [x] Nexarの公式ライセンス、データカード、指定引用を公開文書から参照できる
 - [x] MP4、Parquet、フレーム、特徴量cache、動画別出力、raw checkpoint、Cookieが公開対象から除外されている
 - [x] B probeモデルを初回公開から除外し、将来公開時の権利確認を保留事項として記録した
-- [x] `vitl.pt`の公式出所と個別条件を確認し、初回公開から除外する方針を確定した
-- [x] Meta由来コードの転載・翻案範囲を確認し、該当するMIT/Apache-2.0表示を第三者表示に反映した
+- [x] 公式HF上のMIT表示ファイルとのSHA-256・size一致を確認し、実取得経路は未確認と記録した。checkpoint本体は初回公開から除外した
+- [x] Meta由来実装の対応箇所を確認し、predictor.pyの帰属/ライセンス参照とpinned MIT本文を保持した。独立実装/翻案の線引きは断定しない
 - [x] 現行Git履歴、公開ツリー、wheel、sdist、圧縮アーカイブ候補を検査した。GitHub Release添付は作成前のため、作成時に再確認する
 - [x] READMEとレポートに、公式test未評価・実環境の安全性能未検証であることを明記した
 - [x] 公開する集計結果に絶対パス、個別動画の識別情報、画像、秘密情報がないことを確認した
