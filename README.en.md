@@ -122,6 +122,12 @@ uv run python -m jepa_risk.cli report \
   --prediction-scores artifacts/prediction-p6-validation/scores.json
 ```
 
+## Input-detail comparison (2026-10)
+
+With the V-JEPA 2 encoder frozen, a separate linear probe is refit for each 256/128/64 input-detail condition. See the [English report](reports/jepa-low-resolution-probe-refit-20261016.en.md) and [Japanese report](reports/jepa-low-resolution-probe-refit-20261016.md) for the input transformations, window AP, intervals for differences, and limitations.
+
+The execution code for this comparison and the corresponding preprocessing changes have not yet been published. The reports present saved experimental results; cloning the currently published repository alone does not reproduce this experiment. Publishing and validating the code and window-level aggregation procedure require separate work.
+
 ## Dataset and model inputs
 
 The Nexar dataset must be downloaded separately from the [official Hugging Face dataset](https://huggingface.co/datasets/nexar-ai/nexar_collision_prediction). This repository does not include videos, Parquet metadata, frames, or derived data. Use only the official `train` split for the current Phase 1 configuration.

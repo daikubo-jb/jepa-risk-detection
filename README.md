@@ -136,6 +136,12 @@ uv run python -m jepa_risk.cli evaluate \
 
 全件validationの統合レポートは`artifacts/report-p6-full-ab/`に生成済みです。公式test未取得のため、現時点の指標は探索的なvalidation結果であり、実運用の警告性能や安全性を保証するものではありません。
 
+## 低解像度条件の比較（2026-10）
+
+V-JEPA 2のencoderを凍結したまま、256/128/64の入力detail条件で線形probeを個別に再学習した評価をまとめました。条件の作り方、窓AP、差の区間、限界は[日本語レポート](reports/jepa-low-resolution-probe-refit-20261016.md)と[英語レポート](reports/jepa-low-resolution-probe-refit-20261016.en.md)を参照してください。ScenePickの実装紹介とは別の、JEPA実験の続編です。
+
+この比較の実行コードと対応する前処理変更は現時点で未公開です。レポートは保存済みの実験結果の報告であり、現在公開中のリポジトリをcloneするだけでは同じ実験を再現できません。コードと窓単位集計手順の公開・検証は別途必要です。
+
 ## Nexar trainデータ
 
 Nexarのtrainデータは公式Hugging Face配布から取得します。公式test-public / test-privateは取得せず、学習用1,500本だけを使います。取得済みデータの保存先は`artifacts/data/nexar_train`です。
