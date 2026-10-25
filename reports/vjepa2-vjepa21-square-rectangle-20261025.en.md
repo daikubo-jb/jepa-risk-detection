@@ -64,7 +64,7 @@ AP measures whether positive examples are ranked above negative examples; it is 
 | V-JEPA 2.1, square | 0.535919 / 0.986073 | 0.057622 / 0.732140 | 0.050938 / 0.719361 |
 | V-JEPA 2.1, landscape | 0.539652 / 0.987757 | 0.067239 / 0.707855 | 0.059994 / 0.701584 |
 
-The AP difference is the value for the right-hand condition minus the left-hand condition.
+The direction of each difference is shown in the Comparison column.
 
 | Comparison | AP difference | 95% percentile interval |
 |---|---:|---:|
