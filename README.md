@@ -142,6 +142,10 @@ V-JEPA 2のencoderを凍結したまま、256/128/64の入力detail条件で線�
 
 この比較の実行コードと対応する前処理変更は現時点で未公開です。レポートは保存済みの実験結果の報告であり、現在公開中のリポジトリをcloneするだけでは同じ実験を再現できません。コードと窓単位集計手順の公開・検証は別途必要です。
 
+## V-JEPA 2 / 2.1の入力形状比較（2026-10）
+
+同じ固定train/validation分割で、V-JEPA 2と2.1を正方形（黒帯あり）・横長（黒帯なし）の4条件で評価した集計レポートです。前処理、結果、制約は[日本語版](reports/vjepa2-vjepa21-square-rectangle-20261025.md)と[英語版](reports/vjepa2-vjepa21-square-rectangle-20261025.en.md)を参照してください。ScenePickの検索比較や256/128/64低解像度probe比較とは別の実験です。
+
 ## Nexar trainデータ
 
 Nexarのtrainデータは公式Hugging Face配布から取得します。公式test-public / test-privateは取得せず、学習用1,500本だけを使います。取得済みデータの保存先は`artifacts/data/nexar_train`です。
